@@ -1,0 +1,18 @@
+Cameron Severson
+May 31st, 2021
+IT FDN 130 A Sp 21: Foundation of Databases
+Assignment07
+https://github.com/crockett-7/DBFoundations-Module07
+
+User Defined Functions
+
+Introduction
+	In many cases the SQL Server built-in functions will not be able to produce the output that we are looking for. In these cases, we can use User Defined Functions (UDFs) to derive the value and our table we are looking for.
+Explain when you would use a SQL UDF.
+	SQL UDFs should be used when there is a table of values or single value that you want to derive, which cannot be achieved using SQL Server’s built-in functions. Table-valued UDFs accept parameters and return the results in the form of a table. UDFs that return a single value are called scalar-valued functions. Scalar-valued UDFs accept parameters and return a single value. Deterministic
+Explain differences between Scalar, Inline, and Multi-Statement Functions.
+	The main difference between scalar-valued functions and the other functions is that scalar functions do not return a table. Both Inline Table-Valued Functions (ITVF) and Multi-Statement Table-Valued Functions (MSTVF) return a table of values based on the defined parameters vs. one atomic value.  
+	An ITVF definition specifies only RETURNS TABLE and not the table definition. The entire query inside the function is a single RETURN statement. A MSTVF definition RETURNS along with the definition of TABLE VARIABLE. The function body might consist of multiple statements and one of which will populate this TABLE VARIABLE. And the scope/life of this TABLE VARIABLE is limited to only this function - outside of this function it is not available. 
+	If we are performing extra data manipulation on SELECT data like INSERT, UPDATE, DELETE or any filtering before we insert the final out put into the TABLE VARIABLE then we use MSTVF. If the function contains complex logic on the input parameter before we start using it in the WHERE clause then we use MSTVF. If we want to implement a View type logic but also want to pass a parameter then we use the ITVF.
+Summary
+	UDFs can be very useful for reporting and the creation of metrics. Scalar, ITVF, and MSTVF all have their place uses based on the output we are looking for.
